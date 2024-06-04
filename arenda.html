@@ -14,7 +14,6 @@
       background-color: #f1f1f1;
       padding: 0px;
     }
-
     .header {
       background-color: #cf7b1b;
       padding: 20px;
@@ -23,11 +22,9 @@
       display: flex;
       align-items: center;
     }
-
     .logo {
       margin-right: 10px;
     }
-
     .menu {
       list-style-type: none;
       padding: 0;
@@ -35,12 +32,10 @@
       margin-bottom: 20px;
       text-align: center;
     }
-
     .menu li {
       display: inline-block;
       margin: 10px;
     }
-
     .button {
       font-size: 1.2rem;
       padding: 12px 24px;
@@ -51,11 +46,9 @@
       cursor: pointer;
       transition: color 0.3s ease;
     }
-
     .button:hover {
       color: black;
     }
-
     .content {
       max-width: 800px;
       margin: 0 auto;
@@ -64,17 +57,14 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-
     .form-group {
       margin-bottom: 20px;
     }
-
     label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
     }
-
     input[type="text"],
     input[type="email"],
     textarea {
@@ -84,25 +74,20 @@
       border-radius: 5px;
       box-sizing: border-box;
     }
-
     input[type="checkbox"] {
       margin-right: 5px;
     }
-
     #submitBtn {
       background-color: #cf7b1b;
       color: #fff;
     }
-
     #message {
       margin-top: 20px;
       text-align: center;
     }
-
     #message.success {
       color: green;
     }
-
     #message.error {
       color: red;
     }
@@ -124,7 +109,7 @@
   </nav>
   <div class="content">
     <h1>Заполните форму, и мы свяжемся с вами!</h1>
-    <form id="rentForm" action="sendEmail.php" method="post">
+    <form id="rentForm" action="https://formspree.io/f/mbjnvpga" method="post">
       <div class="form-group">
         <label for="name">Имя и фамилия:</label>
         <input type="text" id="name" name="name" required>
@@ -139,24 +124,22 @@
       </div>
       <div class="form-group">
         <label for="comment">Комментарий (необязательно):</label>
-        <textarea id="comment" name="comment"></textarea>
+        <textarea id="comment" name="message"></textarea>
       </div>
       <div class="form-group">
         <input type="checkbox" id="agree" required>
-        <label for="agree">Отправляя эту форму, Вы соглашаетесь с <a href="https://rarus-soft.ru/about/privacy-policy/?utm_medium=referral&utm_campaign=widget-arenda-1c&utm_source=1cistline.ru"> Политикой конфиденциальности</label></a>
+        <label for="agree">Отправляя эту форму, Вы соглашаетесь с <a href="https://rarus-soft.ru/about/privacy-policy/?utm_medium=referral&utm_campaign=widget-arenda-1c&utm_source=1cistline.ru"> Политикой конфиденциальности</a></label>
       </div>
       <button type="submit" class="button" id="submitBtn">Оставить заявку</button>
     </form>
     <div id="message"></div>
   </div>
-
   <footer>
     <div class="footer-content">
       <p>Контакты: Телефон +7(951)432-63-78 | Email: 1CKorD@gmail.com | Адрес: Кемерово, ул. Пушкина, 19 А, оф. 311, 2 этаж</p>
       <p>© 2024 Внедрение и сопровождение "1C:KorD"</p>
     </div>
   </footer>
-
   <script>
     $(document).ready(function() {
     $(".phone").mask("+7(999)999-9999");
@@ -188,13 +171,19 @@
         if (valid) {
             $.ajax({
                 type: "POST",
-                url: "sendEmail.php",
+                url: "https://formspree.io/f/mbjnvpga",
                 data: $(this).serialize(),
+                dataType: "json",
                 success: function(response) {
-                    $("#message").removeClass("error").addClass("success").text(response);
+                    $("#message").removeClass("error").addClass("success").text("Ваша заявка успешно отправлена.");
                 },
-                error: function() {
-                    $("#message").removeClass("success").addClass("error").text("Ошибка при отправке заявки. Попробуйте еще раз.");
+                error: function(xhr, status, error) {
+                    if (xhr.status === 200) {
+                        // Если код состояния 200, считаем, что заявка отправлена успешно
+                        $("#message").removeClass("error").addClass("success").text("Ваша заявка успешно отправлена.");
+                    } else {
+                        $("#message").removeClass("success").addClass("error").text("Ошибка при отправке заявки. Попробуйте еще раз.");
+                    }
                 }
             });
         } else {
@@ -202,7 +191,6 @@
         }
     });
 });
-
   </script>
 </body>
 </html>
