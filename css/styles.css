@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("gerb2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    margin: 0;
+    padding: 0px;
+}
+
+.header {
+    background-color: #cf7b1b;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    align-items: center; /* Центрирование элементов по вертикали */
+}
+
+.logo {
+    margin-right: 10px; /* Расстояние между логотипом и заголовком */
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    background-color: #f1f1f1;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.menu li {
+    display: inline-block;
+    margin: 10px;
+}
+
+.button {
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    background-color: #cf7b1b;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.button:hover {
+    color: black;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+    min-height: calc(100vh - 120px);
+}
+
+.footer-content {
+    text-align: center;
+    padding: 10px;
+}
+
+footer {
+    background-color: #cf7b1b;
+    color: #fff;
+    padding: 1px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.logo-image {
+    max-width: 100px;
+}
+
+.reklama {
+    position:absolute;
+    
+}
+
+/* Стили для всплывающих подсказок */
+.employee {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .employee img {
+    max-width: 150px;
+    height: 200px;
+    border-radius: 100%;
+    margin: 5px;
+  }
+  
+  /* Стили для подсказок */
+  .employee img:hover::after {
+    content: attr(title); /* Отображаем текст из атрибута title */
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap; /* Предотвращает перенос строк */
+  }

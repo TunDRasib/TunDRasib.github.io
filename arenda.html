@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Внедрение и сопровождение "1C:KorD"</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      padding: 0px;
+    }
+
+    .header {
+      background-color: #cf7b1b;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      margin-right: 10px;
+    }
+
+    .menu {
+      list-style-type: none;
+      padding: 0;
+      background-color: #f1f1f1;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .menu li {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .button {
+      font-size: 1.2rem;
+      padding: 12px 24px;
+      background-color: #cf7b1b;
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .button:hover {
+      color: black;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    #submitBtn {
+      background-color: #cf7b1b;
+      color: #fff;
+    }
+
+    #message {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #message.success {
+      color: green;
+    }
+
+    #message.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html"><img src="logo/logo.png" alt="logo" class="logo-image"></a>
+    </div>
+    <h1>Внедрение и сопровождение "1C:KorD"</h1>
+  </header>
+  <nav>
+    <ul class="menu">
+      <li><button type="button" class="button" onclick="window.location.href='uslugi.html'">Услуги</button></li>
+      <li><button type="button" class="button" onclick="window.location.href='Okompanii.html'">О компании</button></li>
+      <li><button type="button" class="button" onclick="window.location.href='arenda.html'">Аренда программ 1С</button></li>
+    </ul>
+  </nav>
+  <div class="content">
+    <h1>Заполните форму, и мы свяжемся с вами!</h1>
+    <form id="rentForm">
+      <div class="form-group">
+        <label for="name">Имя и фамилия:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Телефон:</label>
+        <input type="text" id="phone" name="phone" class="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="comment">Комментарий (необязательно):</label>
+        <textarea id="comment" name="comment"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="agree" required>
+        <label for="agree">Отправляя эту форму, Вы соглашаетесь с <a href="https://rarus-soft.ru/about/privacy-policy/?utm_medium=referral&utm_campaign=widget-arenda-1c&utm_source=1cistline.ru"> Политикой конфиденциальности</label></a>
+      </div>
+      <button type="submit" class="button" id="submitBtn">Оставить заявку</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>Контакты: Телефон +7(951)432-63-78 | Email: 1CKorD@gmail.com | Адрес: Кемерово, ул. Пушкина, 19 А, оф. 311, 2 этаж</p>
+      <p>© 2024 Внедрение и сопровождение "1C:KorD"</p>
+    </div>
+  </footer>
+
+  <script>
+    $(document).ready(function() {
+      $(".phone").mask("+7(999)999-9999");
+
+      $("#rentForm").submit(function(event) {
+        event.preventDefault();
+        var formData = $(this).serializeArray();
+        var valid = true;
+
+        // Проверка на заполненность полей
+        formData.forEach(function(field) {
+          if (field.value.trim() === "" && field.name !== "comment") {
+            valid = false;
+            $("#" + field.name).addClass("error");
+          } else {
+            $("#" + field.name).removeClass("error");
+          }
+        });
+
+        // Проверка согласия с политикой конфиденциальности
+        if (!$("#agree").is(":checked")) {
+          valid = false;
+          $("#agree").addClass("error");
+        } else {
+          $("#agree").removeClass("error");
+        }
+
+        // Отправка данных или вывод ошибки
+        if (valid) {
+          $("#message").removeClass("error").addClass("success").text("Ваша заявка отправлена.");
+          // Здесь можно добавить код для отправки данных на сервер
+        } else {
+          $("#message").removeClass("success").addClass("error").text("Пожалуйста, заполните все обязательные поля и согласитесь с политикой конфиденциальности.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
