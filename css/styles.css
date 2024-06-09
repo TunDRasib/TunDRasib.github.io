@@ -1,5 +1,4 @@
 body {
-    height: 100%;
     font-family: Arial, sans-serif;
     background-image: url("gerb2.jpg");
     background-repeat: no-repeat;
@@ -62,7 +61,7 @@ body {
 
 .footer-content {
     text-align: center;
-    padding: 10px;
+    padding: 0px;
 }
 
 footer {
@@ -73,7 +72,6 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    margin: auto;
 }
 
 .logo-image {
