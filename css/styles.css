@@ -65,14 +65,15 @@ body {
 }
 
 footer {
-    background-color: #cf7b1b;
-    color: #fff;
-    padding: 1px 0;
+    padding: 20px;
+    background-color: #cf7b1b; /* Цвет фона подвала */
+    color: white;
     text-align: center;
-    position: fixed;
-    bottom: 0;
+    position: relative;
     width: 100%;
-}
+    box-sizing: border-box;
+    margin-top: auto; /* Подвинуть подвал вниз */
+  }
 
 .logo-image {
     max-width: 100px;
